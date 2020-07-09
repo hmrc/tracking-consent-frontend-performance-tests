@@ -14,4 +14,10 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
       .get(s"$baseUrl/tracking-consent/tracking.js")
       .check(status.is(200))
   }
+
+  val navigateToCookieSettings = {
+    http("Navigate to cookie settings")
+      .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
+      .check(status.is(200))
+  }
 }
