@@ -7,7 +7,6 @@ class TrackingConsentFrontendSimulation extends PerformanceTestRunner {
 
   setup("download", "Retrieve the tracking script") withRequests navigateToTrackingJs
   setup("cookie-settings", "Visit the cookie settings page") withRequests navigateToCookieSettings
-  setup("test-only", "Visit the test page with tracking snippet") withRequests (navigateToTestPage, navigateToTrackingJs)
 
   runSimulation()
 }
