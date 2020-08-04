@@ -20,10 +20,4 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
       .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
       .check(status.is(200))
   }
-
-  val navigateToTestPage = {
-    http("Navigate to test page with tracking.js snippet")
-      .get(s"$baseUrl/tracking-consent/test-only?enableTrackingConsent=true")
-      .check(status.is(200))
-  }
 }
