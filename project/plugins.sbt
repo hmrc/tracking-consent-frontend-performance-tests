@@ -1,13 +1,7 @@
-credentials += Credentials(Path.userHome / ".sbt" / ".credentials")
+resolvers += Resolver.url("HMRC Sbt Plugin Releases", url("https://dl.bintray.com/hmrc/sbt-plugin-releases"))(
+  Resolver.ivyStylePatterns)
 
-val hmrcRepoHost = java.lang.System.getProperty("hmrc.repo.host", "https://nexus-preview.tax.service.gov.uk")
-
-resolvers ++= Seq(
-  "hmrc-snapshots" at hmrcRepoHost + "/content/repositories/hmrc-snapshots",
-  "hmrc-releases" at hmrcRepoHost + "/content/repositories/hmrc-releases",
-  Resolver.url("hmrc-sbt-plugin-releases",
-    url(hmrcRepoHost + "/content/repositories/bintray-hmrc-sbt-plugin-releases"))(Resolver.ivyStylePatterns)
-)
+resolvers += "HMRC Releases" at "https://dl.bintray.com/hmrc/releases"
 
 addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.8.0")
 
