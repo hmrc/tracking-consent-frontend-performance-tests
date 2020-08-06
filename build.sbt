@@ -28,6 +28,7 @@ lazy val microservice = Project(appName, file("."))
       "-Xmax-classfile-name", "100",
       "-encoding", "UTF-8"
     ),
+    javaOptions in Gatling ++= overrideDefaultJavaOptions("-Xms4096m", "-Xmx16384m"),
     retrieveManaged := true,
     initialCommands in console := "import uk.gov.hmrc._",
     parallelExecution in Test := false,
