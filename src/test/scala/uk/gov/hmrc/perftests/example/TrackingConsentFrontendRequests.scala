@@ -7,7 +7,7 @@ import io.gatling.http.Predef._
 
 object TrackingConsentFrontendRequests extends ServicesConfiguration {
 
-  val baseUrl = baseUrlFor("tracking-consent")
+  val baseUrl = baseUrlFor("tracking-consent-frontend")
 
   val navigateToTrackingJs = {
     http("Navigate to tracking.js")
