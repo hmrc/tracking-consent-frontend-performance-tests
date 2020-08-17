@@ -1,18 +1,12 @@
-import sbt.Keys._
-import sbt._
-import sbt.plugins.{CorePlugin, IvyPlugin, JvmPlugin}
-
-val appName = "tracking-consent-frontend-performance-tests"
-val appVersion = "0.1.0-SNAPSHOT"
-
-lazy val microservice = Project(appName, file("."))
+lazy val root = (project in file("."))
   .enablePlugins(GatlingPlugin)
   .enablePlugins(CorePlugin)
   .enablePlugins(JvmPlugin)
   .enablePlugins(IvyPlugin)
   .settings(
-    version := appVersion,
-    scalaVersion := "2.11.12",
+    name := "tracking-consent-frontend-performance-tests",
+    version := "0.1.0-SNAPSHOT",
+    scalaVersion := "2.12.12",
     libraryDependencies ++= Seq(
       Dependencies.Compile.typesafeConfig,
       Dependencies.Compile.gatlingHighCharts,
