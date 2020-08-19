@@ -8,7 +8,15 @@ lazy val root = (project in file("."))
     version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.12.12",
     libraryDependencies ++= Dependencies.test,
-    scalacOptions ++= Seq("-feature"),
+    scalacOptions ++= Seq(
+      "-unchecked",
+      "-deprecation",
+      "-Xlint",
+      "-target:jvm-1.8",
+      "-Xmax-classfile-name", "100",
+      "-encoding", "UTF-8",
+      "-feature"
+    ),
     javaOptions in Gatling ++= overrideDefaultJavaOptions("-Xms4096m", "-Xmx16384m"),
     retrieveManaged := true,
     initialCommands in console := "import uk.gov.hmrc._",
