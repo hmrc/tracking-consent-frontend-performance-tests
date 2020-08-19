@@ -7,21 +7,8 @@ lazy val root = (project in file("."))
     name := "tracking-consent-frontend-performance-tests",
     version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.12.12",
-    libraryDependencies ++= Seq(
-      Dependencies.Compile.typesafeConfig,
-      Dependencies.Compile.gatlingHighCharts,
-      Dependencies.Compile.gatlingTestFramework,
-      Dependencies.Compile.performanceTestRunner
-    ),
-    scalacOptions ++= Seq(
-      "-unchecked",
-      "-deprecation",
-      "-Xlint",
-      "-language:_",
-      "-target:jvm-1.8",
-      "-Xmax-classfile-name", "100",
-      "-encoding", "UTF-8"
-    ),
+    libraryDependencies ++= Dependencies.test,
+    scalacOptions ++= Seq("-feature"),
     javaOptions in Gatling ++= overrideDefaultJavaOptions("-Xms4096m", "-Xmx16384m"),
     retrieveManaged := true,
     initialCommands in console := "import uk.gov.hmrc._",
