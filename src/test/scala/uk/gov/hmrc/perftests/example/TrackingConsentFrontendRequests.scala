@@ -25,7 +25,7 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
 
   val baseUrl = baseUrlFor("tracking-consent-frontend")
 
-  val navigateToTrackingJs = {
+  val requestTrackingJs = {
     http("Navigate to tracking.js")
       .get(s"$baseUrl/tracking-consent/tracking.js")
       .check(status.is(200))
@@ -34,6 +34,14 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
   val navigateToCookieSettings = {
     http("Navigate to cookie settings")
       .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
+      .check(status.is(200))
+  }
+
+  val postToAuditEndpoint = {
+    http("Audit the tracking consent decision")
+      .post(s"$baseUrl/tracking-consent/audit")
+      .header("Content-Type", "application/json")
+      .body(StringBody("{\"measurement\":true,\"marketing\":true,\"settings\":true}"))
       .check(status.is(200))
   }
 }
