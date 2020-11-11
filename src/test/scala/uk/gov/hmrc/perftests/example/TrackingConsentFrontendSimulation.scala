@@ -21,7 +21,8 @@ import uk.gov.hmrc.perftests.example.TrackingConsentFrontendRequests._
 
 class TrackingConsentFrontendSimulation extends PerformanceTestRunner {
 
-  setup("download", "Retrieve the tracking script") withRequests navigateToTrackingJs
+  setup("download", "Retrieve the tracking script") withRequests requestTrackingJs
+  setup("audit", "Audit the tracking consent decision") withRequests postToAuditEndpoint
   setup("cookie-settings", "Visit the cookie settings page") withRequests navigateToCookieSettings
 
   runSimulation()
