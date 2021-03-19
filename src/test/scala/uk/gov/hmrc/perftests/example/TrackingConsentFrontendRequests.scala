@@ -40,7 +40,7 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
   val postToAuditEndpoint = {
     http("Audit the tracking consent decision")
       .post(s"$baseUrl/tracking-consent/audit")
-      .header("Content-Type", "application/json")
+      .header(HttpHeaderNames.ContentType, "application/json")
       .body(StringBody("{\"measurement\":true,\"marketing\":true,\"settings\":true}"))
       .check(status.is(200))
   }
