@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,12 @@ import uk.gov.hmrc.perftests.example.TrackingConsentFrontendRequests._
 
 class TrackingConsentFrontendSimulation extends PerformanceTestRunner {
 
-  setup("download", "Retrieve the tracking script") withRequests requestTrackingJs
-  setup("audit", "Audit the tracking consent decision") withRequests postToAuditEndpoint
-  setup("cookie-settings", "Visit the cookie settings page") withRequests navigateToCookieSettings
+  setup("tracking-js-uncached", "Request tracking.js, return 200 OK") withRequests getTrackingJs
+  setup("tracking-js-cached", "Request tracking.js, return 304 Not Modified") withRequests getTrackingJsNotModified
+  setup("optimizely-js-uncached", "Request optimizely.js, return 200 OK") withRequests getOptimizelyJs
+  setup("optimizely-js-cached", "Request optimizely.js, return 304 Not Modified") withRequests getOptimizelyJsNotModified
+  setup("audit-consent", "Audit the tracking consent decision") withRequests postToAuditEndpoint
+  setup("cookie-settings", "Visit the cookie settings page") withRequests getCookieSettingsPage
 
   runSimulation()
 }
