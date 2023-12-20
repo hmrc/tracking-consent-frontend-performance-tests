@@ -28,34 +28,16 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
 
   private val baseUrl = baseUrlFor("tracking-consent-frontend")
 
-  private val httpCurrentDateTimeWithLeadingZero = DateTimeFormatter.RFC_1123_DATE_TIME
-    .format(ZonedDateTime.now(ZoneOffset.UTC))
-    .replaceFirst(", ([^0] )", ", 0$1")
-
   val getTrackingJs: HttpRequestBuilder = {
     http("GET tracking.js")
       .get(s"$baseUrl/tracking-consent/tracking.js")
       .check(status.is(200))
   }
 
-  val getTrackingJsNotModified: HttpRequestBuilder = {
-    http("GET tracking.js, but not modified")
-      .get(s"$baseUrl/tracking-consent/tracking.js")
-      .header(HttpHeaderNames.IfModifiedSince, httpCurrentDateTimeWithLeadingZero)
-      .check(status.is(304))
-  }
-
   val getOptimizelyJs: HttpRequestBuilder = {
     http("GET optimizely.js")
       .get(s"$baseUrl/tracking-consent/tracking/optimizely.js")
       .check(status.is(200))
-  }
-
-  val getOptimizelyJsNotModified: HttpRequestBuilder = {
-    http("GET optimizely.js, but not modified")
-      .get(s"$baseUrl/tracking-consent/tracking/optimizely.js")
-      .header(HttpHeaderNames.IfModifiedSince, httpCurrentDateTimeWithLeadingZero)
-      .check(status.is(304))
   }
 
   val getCookieSettingsPage: HttpRequestBuilder = {
