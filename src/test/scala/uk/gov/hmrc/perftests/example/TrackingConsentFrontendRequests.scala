@@ -41,7 +41,7 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
   }
 
   val getCookieSettingsPage: HttpRequestBuilder = {
-    val hmrcFrontendVersion = "5.59.0"
+    val hmrcFrontendVersion = "5.66.0"
     http("Load cookie settings page, with assets")
       .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
       .resources(
