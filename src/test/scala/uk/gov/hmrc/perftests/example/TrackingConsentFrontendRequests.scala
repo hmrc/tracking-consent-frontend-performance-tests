@@ -40,7 +40,7 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
       .check(status.is(200))
   }
 
-  val getLiveHmrcFrontendVersion: String = {
+  val currentHmrcFrontendVersion: String = {
     val url = "https://staging.tax.service.gov.uk/help/cookie-details"
     val versionRegex: Regex = raw"hmrc-frontend-([0-9]+\.[0-9]+\.[0-9]+)\.min.js".r
     val content: String = Source.fromURL(url).mkString
@@ -53,7 +53,7 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
   }
 
   val getCookieSettingsPage: HttpRequestBuilder = {
-    val hmrcFrontendVersion = getLiveHmrcFrontendVersion
+    val hmrcFrontendVersion = currentHmrcFrontendVersion
     http("Load cookie settings page, with assets")
       .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
       .resources(
