@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
-
-import java.time.format.DateTimeFormatter
-import java.time.{ZoneOffset, ZonedDateTime}
+import scala.io.Source
+import scala.util.matching.Regex
 
 object TrackingConsentFrontendRequests extends ServicesConfiguration {
 
   private val baseUrl = baseUrlFor("tracking-consent-frontend")
+  private val defaultHmrcFrontendVersion = "5.66.0"
 
   val getTrackingJs: HttpRequestBuilder = {
     http("GET tracking.js")
@@ -41,7 +41,14 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
   }
 
   val getCookieSettingsPage: HttpRequestBuilder = {
-    val hmrcFrontendVersion = "5.66.0"
+    val versionRegex: Regex = raw"hmrc-frontend-([0-9]+\.[0-9]+\.[0-9]+)\.min.js".r
+    val content: String = Source.fromURL(s"$baseUrl/tracking-consent/cookie-settings").mkString
+    val hmrcFrontendVersion = versionRegex.findFirstMatchIn(content) match {
+      case Some(matched) =>
+        matched.group(1)
+      case None =>
+        defaultHmrcFrontendVersion
+    }
     http("Load cookie settings page, with assets")
       .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
       .resources(
