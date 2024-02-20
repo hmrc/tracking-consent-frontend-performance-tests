@@ -40,24 +40,20 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
       .check(status.is(200))
   }
 
-  val hmrcFrontendVersion: String = {
+  val getCookieSettingsPage: HttpRequestBuilder = {
     val versionRegex: Regex = raw"hmrc-frontend-([0-9]+\.[0-9]+\.[0-9]+)\.min.js".r
     val content: String = Source.fromURL(s"$baseUrl/tracking-consent/cookie-settings").mkString
-    versionRegex.findFirstMatchIn(content) match {
+    val hmrcFrontendVersion = versionRegex.findFirstMatchIn(content) match {
       case Some(matched) =>
         matched.group(1)
       case None =>
         defaultHmrcFrontendVersion
     }
-  }
-
-  val getCookieSettingsPage: HttpRequestBuilder = {
-    val version = hmrcFrontendVersion
     http("Load cookie settings page, with assets")
       .get(s"$baseUrl/tracking-consent/cookie-settings?enableTrackingConsent=true")
       .resources(
-        http("hmrc-frontend-css").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/hmrc-frontend-$version.min.css"),
-        http("hmrc-frontend-js").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/hmrc-frontend-$version.min.js"),
+        http("hmrc-frontend-css").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/hmrc-frontend-$hmrcFrontendVersion.min.css"),
+        http("hmrc-frontend-js").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/hmrc-frontend-$hmrcFrontendVersion.min.js"),
         http("application-css").get(s"$baseUrl/tracking-consent/assets/stylesheets/application.css"),
         http("settings-js").get(s"$baseUrl/tracking-consent/assets/settingsPage.js"),
         http("optimizely-js").get(s"$baseUrl/tracking-consent/assets/optimizely.js"),
