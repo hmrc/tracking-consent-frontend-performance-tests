@@ -1,10 +1,9 @@
 lazy val root = (project in file("."))
   .enablePlugins(GatlingPlugin)
-  .enablePlugins(SbtAutoBuildPlugin)
   .settings(
     name := "tracking-consent-frontend-performance-tests",
     version := "0.1.0-SNAPSHOT",
-    scalaVersion := "2.12.12",
+    scalaVersion := "2.13.10",
     libraryDependencies ++= Dependencies.test,
     //implicitConversions & postfixOps are Gatling recommended -language settings
     scalacOptions ++= Seq("-feature", "-language:implicitConversions", "-language:postfixOps"),
