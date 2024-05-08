@@ -25,4 +25,5 @@ yarn-error.log
 .metals/
 project/metals.sbt
 .vscode/
+/.bsp
     
