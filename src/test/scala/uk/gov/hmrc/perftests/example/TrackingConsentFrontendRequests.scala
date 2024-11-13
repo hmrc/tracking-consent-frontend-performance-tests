@@ -57,7 +57,7 @@ object TrackingConsentFrontendRequests extends ServicesConfiguration {
         http("application-css").get(s"$baseUrl/tracking-consent/assets/stylesheets/application.css"),
         http("settings-js").get(s"$baseUrl/tracking-consent/assets/settingsPage.js"),
         http("optimizely-js").get(s"$baseUrl/tracking-consent/assets/optimizely.js"),
-        http("hmrc-frontend-govuk-crest").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/govuk/images/govuk-crest-2x.png"),
+        http("hmrc-frontend-govuk-crest").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/govuk/images/govuk-crest.svg"),
         http("hmrc-frontend-font-bold").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/govuk/fonts/bold-b542beb274-v2.woff2"),
         http("hmrc-frontend-font-light").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/govuk/fonts/light-94a07e06a1-v2.woff2"),
         http("hmrc-frontend-favicon").get(s"$baseUrl/tracking-consent/hmrc-frontend/assets/govuk/images/favicon.ico")
