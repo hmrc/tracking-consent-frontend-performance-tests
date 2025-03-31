@@ -12,7 +12,6 @@ lazy val root = (project in file("."))
     // These testOptions are not compatible with `sbt gatling:test`. So we have to override testOptions here.
     testOptions in Test := Seq.empty,
     resolvers ++= Seq(
-      Resolver.bintrayRepo("hmrc", "releases"),
       Resolver.typesafeRepo("releases")
     )
   )
