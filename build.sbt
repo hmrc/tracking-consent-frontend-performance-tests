@@ -7,10 +7,10 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Dependencies.test,
     //implicitConversions & postfixOps are Gatling recommended -language settings
     scalacOptions ++= Seq("-feature", "-language:implicitConversions", "-language:postfixOps"),
-    javaOptions in Gatling ++= overrideDefaultJavaOptions("-Xms4096m", "-Xmx16384m"),
+    Gatling / javaOptions ++= overrideDefaultJavaOptions("-Xms4096m", "-Xmx16384m"),
     // Enabling sbt-auto-build plugin provides DefaultBuildSettings with default `testOptions` from `sbt-settings` plugin.
     // These testOptions are not compatible with `sbt gatling:test`. So we have to override testOptions here.
-    testOptions in Test := Seq.empty,
+    Test / testOptions := Seq.empty,
     resolvers ++= Seq(
       Resolver.typesafeRepo("releases")
     )
